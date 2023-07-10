@@ -1,6 +1,7 @@
 # Dolphin - Game Swap
 
-> This tool provides a way to swap between 10 games at a random interval when using the Dolphin emulator.
+> This tool provides a way to swap between 10 game instance at a random interval when using the Dolphin emulator.
+> Original implementation by [DougDoug](https://www.twitch.tv/dougdoug)
 
 ## Setup
 
@@ -20,3 +21,5 @@ cp .env.example .env
 ```
 
 Open the `.env` file and adjust the variables to suit your needs.
+
+Note that this application requires administrator privileges as it relies on keyboard input to work.
