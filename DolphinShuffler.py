@@ -27,7 +27,7 @@ SPACEBAR_COOLDOWN = 2  # Cooldown time for the spacebar interrupt, in seconds
 
 def swap_game():
     global last_swap, current_slot, previous_slot, multiple_slots_remain
-    
+
     # Update OBS text
     if USING_OBS_WEBSOCKETS:
         obswebsockets_manager.set_text(OBS_TEXT_SOURCE, f"RACES LEFT: {len(remaining_slots)}")
@@ -46,13 +46,13 @@ def swap_game():
     elif len(remaining_slots) == 1 and multiple_slots_remain: # If this is the first time we've gotten to the last slot, we swap to it, then set a flag so that we don't swap again
          multiple_slots_remain = False
          current_slot = random.choice(remaining_slots)
-         audio_manager.play_audio("Final Race.mp3",False,False)
+         audio_manager.play_audio("audio/final_race.mp3",False,False)
          keyboard.press(f'F{current_slot}')
          time.sleep(0.1)
          keyboard.release(f'F{current_slot}')
          print(f"\nSWAPPING TO SLOT {current_slot}!")
     elif len(remaining_slots) == 0: # Challenge completed!
-        audio_manager.play_audio("You Have Completed The Challenge.mp3",False,False)
+        audio_manager.play_audio("audio/you_have_completed_the_challenge.mp3",False,False)
         time.sleep(60)
         sys.exit()
 
@@ -94,16 +94,16 @@ def keyboard_listener():
                 print(f"Removed {current_slot} from unfinished_slots")
             stop_thread.set()  # Signal the other thread to stop
             if len(remaining_slots) > 1:
-                audio_manager.play_audio("Race Completed.mp3",False,False)
+                audio_manager.play_audio("audio/race_completed.mp3",False,False)
             break
 
 ######################################################################
 
 print("\nPRESS SPACEBAR TO BEGIN!")
-audio_manager.play_audio("Press Spacebar To Begin.mp3", False)
+audio_manager.play_audio("audio/press_spacebar_to_begin.mp3", False)
 keyboard.wait('space')
 
-audio_manager.play_audio("Starting in 3 2 1.mp3", False)
+audio_manager.play_audio("audio/starting_in_3_2_1.mp3", False)
 countdown = 3
 while countdown > 0:
     print(f"\nSTARTING IN {countdown}")
@@ -117,7 +117,7 @@ while True:
 
     swap_game()
 
-    while listener.is_alive():  
+    while listener.is_alive():
         # the listener thread is still waiting for the space bar, so let's start a new game
         stop_thread.clear()
         swap_game()
