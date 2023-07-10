@@ -1,15 +1,18 @@
 from obswebsocket import obsws, requests  # noqa: E402
-from Websockets_Auth import websocket_host, websocket_port, websocket_password
+import os
+
+from dotenv import load_dotenv
+load_dotenv()
 
 ##########################################################
 ##########################################################
 
 class OBSWebsocketsManager:
     ws = None
-    
+
     def __init__(self):
         # Connect to websockets
-        self.ws = obsws(websocket_host, websocket_port, websocket_password)
+        self.ws = obsws(os.getenv('WEBSOCKET_HOST'), int(os.getenv('WEBSOCKET_PORT')), os.getenv('WEBSOCKET_PASSWORD'))
         self.ws.connect()
         print("Connected to OBS Websockets!\n")
 

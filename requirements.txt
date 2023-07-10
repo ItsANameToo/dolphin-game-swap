@@ -155,5 +155,6 @@ pyobjc-framework-VideoToolbox==9.2
 pyobjc-framework-Virtualization==9.2
 pyobjc-framework-Vision==9.2
 pyobjc-framework-WebKit==9.2
+python-dotenv==1.0.0
 soundfile==0.12.1
 websocket-client==1.6.1

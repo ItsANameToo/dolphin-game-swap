@@ -5,12 +5,16 @@ import threading
 import sys
 from AudioPlayer import AudioManager
 from OBS_Websockets import OBSWebsocketsManager
+import os
 
-MINIMUM_SLOT_TIME = 2 # The minimum time we'll play a specific save slot
-MAXIMUM_SLOT_TIME = 25 # The minimum time we'll play a specific save slot
+from dotenv import load_dotenv
+load_dotenv()
 
-USING_OBS_WEBSOCKETS = True # Whether or not program should display the # of remaining races in OBS
-OBS_TEXT_SOURCE = "RACES LEFT" # Name this whatever text element you want to update in OBS
+MINIMUM_SLOT_TIME = int(os.getenv('MINIMUM_SLOT_TIME')) # The minimum time we'll play a specific save slot
+MAXIMUM_SLOT_TIME = int(os.getenv('MAXIMUM_SLOT_TIME')) # The minimum time we'll play a specific save slot
+
+USING_OBS_WEBSOCKETS = True if os.getenv('USING_OBS_WEBSOCKETS') == 'True' else False # Whether or not program should display the # of remaining races in OBS
+OBS_TEXT_SOURCE = os.getenv('OBS_TEXT_SOURCE') # Name this whatever text element you want to update in OBS
 
 remaining_slots = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 current_slot = None  # The current game slot
